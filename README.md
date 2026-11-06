@@ -1,6 +1,8 @@
 # TPCAP — Automated Parking Benchmarks and Competition Archive
 
-**Twenty challenging parking scenes, and the story of the competition that brought them together.** This repository preserves the preliminary-round benchmarks of the **Trajectory Planning Competition of Automated Parking (TPCAP)**, organized with **IEEE ITSC 2022**.
+[Download ZIP](https://github.com/libai1943/TPCAP_benchmarks/archive/refs/heads/main.zip) · [Getting started](#load-a-case) · [Guide](#data-format) · [Citation](#citation)
+
+**Test a parking planner against twenty scenes, from a pair of quadrilaterals to a map with 53 obstacles.** This repository preserves the preliminary-round benchmarks of the **Trajectory Planning Competition of Automated Parking (TPCAP)**, organized with **IEEE ITSC 2022**.
 
 TPCAP let researchers compare planning algorithms by submitting trajectories, without requiring perception, localization or a physical vehicle platform. The competition drew **61 teams from 24 institutions and companies**, with **466 preliminary submissions**. Its legacy is a collection of challenging scenes, practical evaluation lessons and reusable research resources.
 
@@ -26,6 +28,18 @@ This is a **historical research archive**. The 2022 event has concluded, and thi
 | `docs/.nojekyll` | Serve the site as plain static HTML on GitHub Pages. |
 
 There are no planning functions in this data repository. For executable readers and drawing functions, use the [MATLAB demo](https://github.com/libai1943/TPCAP_demo_Matlab) or [Python demo](https://github.com/libai1943/TPCAP_demo_Python). Those demos load and display the same cases; they do not implement the competition's scoring controller.
+
+## Pick a first case
+
+| If you want to check… | Open | What to look for |
+|---|---|---|
+| A minimal reader | [Case 9](Case9.csv) | Two quadrilaterals. The row has 25 numbers including both poses and the vertex counts. |
+| Many obstacles of the same size in memory | [Case 5](Case5.csv) | 53 quadrilaterals. Each contributes eight coordinates. |
+| Polygons with different vertex counts | [Case 11](Case11.csv) | Successive counts are 5, 4, 6, 5, 5. Advance the cursor by twice the current count. |
+| Precision after a change of origin | [Case 13](Case13.csv) | Coordinates are in the billions of meters, while the start and goal are only meters apart. |
+| A mixture of small and large polygons | [Case 19](Case19.csv) | 37 obstacles, including 11-vertex polygons. The row has 750 numbers. |
+
+Cases 13–15 are useful for testing translation invariance. Load coordinates in double precision. For a local planning frame, subtract the same origin from **both** endpoint positions and **every** obstacle vertex before converting to lower precision. A translation leaves headings unchanged.
 
 ## Load a case
 
